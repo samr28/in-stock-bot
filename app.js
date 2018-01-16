@@ -4,20 +4,25 @@ var cheerio = require('cheerio');
 var schedule = require('node-schedule');
 var slack = require('slack-incoming-webhook');
 var app     = express();
+
 var client = slack({
-  url: 'process.env.WEBHOOK_URL',
+  url: process.env.WEBHOOK_URL,
+});
+var debug = slack({
+  url: process.env.DEBUG_WEBHOOK_URL,
 });
 
 let version = require('./package.json').version;
 
 function check() {
   console.log('Checking at: ' + new Date());
-  url = 'process.env.PRODUCT_URL';
+  url = process.env.PRODUCT_URL;
   var data = "";
   var inStock;
   request(url, function(error, response, html){
       if(!error){
           var $ = cheerio.load(html);
+
 
       $('#options-550-list').filter(function(){
           data = $(this);
@@ -28,13 +33,11 @@ function check() {
           if (item.includes("in-stock")) {
             client('Gearboxes are in stock!');
           }
+          client('check');
         });
       }
     });
   }
 
-client(`Bot v${version} started @ ${new Date()}`);
-
-var j = schedule.scheduleJob('0 * * * *', check);
-
+debug(`Bot v${version} started @ ${new Date()}`);
 exports = module.exports = app;
