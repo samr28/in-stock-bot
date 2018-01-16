@@ -35,6 +35,6 @@ function check() {
 
 client(`Bot v${version} started @ ${new Date()}`);
 
-var j = schedule.scheduleJob('0 * * * * *', check);
+var j = schedule.scheduleJob('0 * * * *', check);
 
 exports = module.exports = app;
