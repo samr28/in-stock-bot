@@ -33,11 +33,13 @@ function check() {
           if (item.includes("in-stock")) {
             client('Gearboxes are in stock!');
           }
-          client('check');
+          console.log(`Checking @ ${new Date()}`);
         });
       }
     });
   }
 
 debug(`Bot v${version} started @ ${new Date()}`);
+console.log(`Bot v${version} started @ ${new Date()}`);
+var j = schedule.scheduleJob('0 * * * *', check);
 exports = module.exports = app;
