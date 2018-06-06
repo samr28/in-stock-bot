@@ -20,7 +20,7 @@
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
     "node-schedule": "^1.3.0",
-    "request": "^2.83.0",
+    "request": "^2.87.0",
     "slack-incoming-webhook": "^1.1.0",
     "underscore": "^1.8.3"
   }
